@@ -1,0 +1,481 @@
+Sub ProcessArray()
+    Dim A(14) As Integer ' Массив из 15 элементов (индексы от 0 до 14)
+    Dim i As Integer
+    Dim sum As Double
+    Dim evenCount As Integer
+    Dim s As String
+    Dim hasTwo As Boolean
+    
+    For i = 0 To 14
+        A(i) = Int(Rnd * 26) ' Rnd возвращает числа от 0 до 1
+        s = s & A(i) & ", "
+        If A(i) = 2 Then hasTwo = True
+    Next i
+    
+    MsgBox "Начальный массив: " & vbCrLf & s
+    
+    s = "" 
+    sum = 0 
+    evenCount = 0 
+    
+    If hasTwo Then
+        For i = 0 To 14
+            If A(i) Mod 2 = 0 Then
+                A(i) = 0
+                evenCount = evenCount + 1
+            End If
+            s = s & A(i) & ", "
+        Next i
+        MsgBox "Конечный массив: " & vbCrLf & s & vbCrLf & "Количество чётных элементов: " & evenCount
+    Else
+
+        Dim oddCount As Integer
+        oddCount = 0
+        For i = 0 To 14
+            If A(i) Mod 2 <> 0 Then
+                sum = sum + A(i)
+                oddCount = oddCount + 1
+            End If
+            s = s & A(i) & ", "
+        Next i
+        If oddCount > 0 Then
+            sum = sum / oddCount
+        End If
+        MsgBox "Конечный массив: " & vbCrLf & s & vbCrLf & "Среднее арифметическое нечётных элементов: " & sum
+    End If
+End Sub
+    
+
+2
+
+
+Sub ProcessArrayM()
+    Dim M(14) As Double ' Массив из 15 элементов (индексы от 0 до 14)
+    Dim i As Integer
+    Dim sumArithmetic As Double
+    Dim productGeometric As Double
+    Dim avgArithmetic As Double
+    Dim avgGeometric As Double
+    Dim razn As Double
+    Dim sumOfSquares As Double
+    Dim s As String
+    
+    For i = 0 To 14
+        M(i) = Int(Rnd * 25) + 1 
+        sumArithmetic = sumArithmetic + M(i) 
+        If i = 0 Then
+            productGeometric = M(i) 
+        Else
+            productGeometric = productGeometric * M(i) 
+        End If
+        s = s & M(i) & ", "
+    Next i
+    
+   
+    avgArithmetic = sumArithmetic / 15
+    avgGeometric = productGeometric ^ (1 / 15)
+    
+    
+    razn = avgArithmetic - avgGeometric
+    
+   
+    If razn Mod 2 = 0 Then
+        
+        s = "" 
+        For i = 0 To 14
+            If i Mod 2 = 0 Then
+                M(i) = 0
+            End If
+            s = s & M(i) & ", "
+        Next i
+        MsgBox "Конечный массив (чётные индексы заменены нулями):" & vbCrLf & s
+    Else
+        
+        For i = 0 To 14
+            sumOfSquares = sumOfSquares + M(i) ^ 2
+        Next i
+        MsgBox "Сумма квадратов всех элементов массива: " & sumOfSquares
+    End If
+End Sub
+
+
+
+3
+
+
+Sub ProcessArrayC()
+    Dim C(14) As Double ' Массив из 15 элементов (индексы от 0 до 14)
+    Dim i As Integer
+    Dim sum As Double
+    Dim avg As Double
+    Dim maxDeviation As Double
+    Dim deviation As Double
+    Dim s As String
+    
+    For i = 0 To 14
+        C(i) = Int(Rnd * 100) + 1
+        sum = sum + C(i) 
+        s = s & C(i) & ", "
+    Next i
+    
+    
+    avg = sum / 15
+    
+   
+    maxDeviation = 0 
+    For i = 0 To 14
+        deviation = Abs(C(i) - avg) 
+        If deviation > maxDeviation Then
+            maxDeviation = deviation 
+        End If
+    Next i
+    
+   
+    MsgBox "Массив C: " & vbCrLf & s & vbCrLf & _
+           "Среднее арифметическое: " & avg & vbCrLf & _
+           "Наибольшее отклонение от среднего: " & maxDeviation
+End Sub
+
+
+4
+
+
+Sub ProcessArrayA()
+    Dim A(11) As Double 
+    Dim i As Integer
+    Dim sum As Double
+    Dim avg As Double
+    Dim initialArray As String
+    Dim finalArray As String
+
+    For i = 0 To 11
+        A(i) = Int(Rnd * 50) + 1 
+        sum = sum + A(i) 
+        initialArray = initialArray & A(i) & ", "
+    Next i
+    
+    
+    avg = sum / 12
+    
+  
+    For i = 0 To 11
+        If A(i) < avg Then
+            A(i) = 0
+        Else
+            A(i) = 1
+        End If
+        finalArray = finalArray & A(i) & ", "
+    Next i
+
+   
+    MsgBox "Начальный массив: " & vbCrLf & initialArray & vbCrLf & _
+           "Среднее арифметическое: " & avg & vbCrLf & _
+           "Конечный массив: " & vbCrLf & finalArray
+End Sub
+
+
+5
+
+
+Sub ProcessArraysCB()
+    Dim C(7) As Integer ' Массив C из 8 элементов (индексы от 0 до 7)
+    Dim B(7) As Integer ' Массив B из 8 элементов (индексы от 0 до 7)
+    Dim i As Integer
+    Dim initialC As String
+    Dim initialB As String
+    Dim finalB As String
+
+   
+    For i = 0 To 7
+        C(i) = Int(Rnd * 50) + 1 
+        B(i) = Int(Rnd * 50) + 1 
+        initialC = initialC & C(i) & ", "
+        initialB = initialB & B(i) & ", "
+    Next i
+    
+   
+    For i = 0 To 7
+        If C(i) Mod 5 = 0 Then
+            B(i) = B(i) * 5 
+        Else
+            B(i) = 0 
+        End If
+        finalB = finalB & B(i) & ", "
+    Next i
+
+    MsgBox "Массив C (начальный): " & vbCrLf & initialC & vbCrLf & _
+           "Массив B (начальный): " & vbCrLf & initialB & vbCrLf & _
+           "Массив B (конечный): " & vbCrLf & finalB
+End Sub
+
+
+6
+
+
+Sub ProcessArrayM()
+    Dim M(14) As Integer ' Массив M из 15 элементов (индексы от 0 до 14)
+    Dim i As Integer
+    Dim countInRange As Integer
+    Dim count As Integer
+    Dim sum As Integer
+    Dim initialM As String
+    Dim finalM As String
+
+   
+    For i = 0 To 14
+        M(i) = Int(Rnd * 16) 
+        If M(i) >= 3 And M(i) <= 11 Then
+            countInRange = countInRange + 1
+        End If
+        initialM = initialM & M(i) & ", "
+    Next i
+
+    If countInRange < 4 Then
+       
+        If countInRange > 0 Then
+            For i = 0 To 14
+                If M(i) Mod countInRange = 0 Then
+                    sum = sum + M(i)
+                End If
+            Next i
+            MsgBox "Сумма элементов, кратных " & countInRange & ": " & sum
+        Else
+            MsgBox "Количество элементов в диапазоне [3, 11] равно 0. Невозможно выполнить операцию."
+        End If
+    Else
+       
+        For i = 0 To 14
+            If countInRange > 0 And M(i) Mod countInRange <= 2 Then
+                M(i) = M(i) ^ 2
+            End If
+            finalM = finalM & M(i) & ", "
+        Next i
+        MsgBox "Конечный массив (с возведением в квадрат): " & vbCrLf & finalM
+    End If
+
+  
+    MsgBox "Начальный массив: " & vbCrLf & initialM
+End Sub
+
+
+
+7
+
+
+Sub ProcessArrayC()
+    Dim C(14) As Double ' Массив C из 15 элементов (индексы от 0 до 14)
+    Dim i As Integer
+    Dim product As Double
+    Dim geoMean As Double
+    Dim maxDeviation As Double
+    Dim deviation As Double
+    Dim initialC As String
+    Dim finalC As String
+
+   
+    product = 1 
+
+  
+    For i = 0 To 14
+        C(i) = Int(Rnd * 50) + 1 
+        product = product * C(i) 
+        initialC = initialC & C(i) & ", "
+    Next i
+
+    geoMean = product ^ (1 / 15)
+
+    maxDeviation = 0
+    For i = 0 To 14
+        deviation = Abs(C(i) - geoMean)
+        If deviation > maxDeviation Then
+            maxDeviation = deviation
+        End If
+    Next i
+
+  
+    If maxDeviation Mod 2 = 0 Then
+       
+        For i = 2 To 14 Step 3
+            C(i) = maxDeviation
+        Next i
+    Else
+       
+        For i = 4 To 14 Step 5
+            C(i) = C(i) ^ 2
+        Next i
+    End If
+
+   
+    For i = 0 To 14
+        finalC = finalC & C(i) & ", "
+    Next i
+
+   
+    MsgBox "Начальный массив C: " & vbCrLf & initialC & vbCrLf & _
+           "Среднее геометрическое: " & geoMean & vbCrLf & _
+           "Наибольшее отклонение: " & maxDeviation & vbCrLf & _
+           "Конечный массив C: " & vbCrLf & finalC
+End Sub
+   
+
+
+8
+
+
+Sub InsertValueP()
+    Dim C(9) As Double ' Массив C из 10 элементов (индексы от 0 до 9)
+    Dim newArray() As Double ' Новый массив с добавлением числа P
+    Dim i As Integer
+    Dim newIndex As Integer
+    Dim P As Double
+    Dim initialC As String
+    Dim finalC As String
+
+ 
+    For i = 0 To 9
+        C(i) = Rnd() * 50 - 25 
+        initialC = initialC & C(i) & ", "
+    Next i
+
+   
+    P = InputBox("Введите значение P, которое нужно вставить между числами с одинаковыми знаками:", "Ввод P", 0)
+
+   
+    ReDim newArray(0)
+    newIndex = 0
+
+    For i = 0 To 8 
+      
+        ReDim Preserve newArray(newIndex)
+        newArray(newIndex) = C(i)
+        newIndex = newIndex + 1
+
+     
+        If (C(i) >= 0 And C(i + 1) >= 0) Or (C(i) < 0 And C(i + 1) < 0) Then
+         
+            ReDim Preserve newArray(newIndex)
+            newArray(newIndex) = P
+            newIndex = newIndex + 1
+        End If
+    Next i
+
+   
+    ReDim Preserve newArray(newIndex)
+    newArray(newIndex) = C(9)
+
+   
+    For i = 0 To UBound(newArray)
+        finalC = finalC & newArray(i) & ", "
+    Next i
+
+   
+    MsgBox "Начальный массив C: " & vbCrLf & initialC & vbCrLf & _
+           "Новый массив C с вставленным числом P: " & vbCrLf & finalC
+End Sub
+
+
+
+
+9
+
+
+Sub SortArrayKDescending()
+    Dim K(7) As Double ' Массив K из 8 элементов (индексы от 0 до 7)
+    Dim i As Integer, j As Integer
+    Dim temp As Double
+    Dim initialK As String
+    Dim sortedK As String
+
+   
+    For i = 0 To 7
+        K(i) = Rnd() * 100 
+        initialK = initialK & K(i) & ", "
+    Next i
+
+    
+    For i = 0 To 6
+        For j = i + 1 To 7
+            If K(i) < K(j) Then
+               
+                temp = K(i)
+                K(i) = K(j)
+                K(j) = temp
+            End If
+        Next j
+    Next i
+
+   
+        sortedK = sortedK & K(i) & ", "
+    Next i
+
+  
+    MsgBox "Начальный массив K: " & vbCrLf & initialK & vbCrLf & _
+           "Отсортированный массив K (по убыванию): " & vbCrLf & sortedK
+End Sub
+
+
+
+10
+
+
+
+Sub ProcessArrayB()
+    Dim B(14) As Integer ' Массив B из 15 элементов (индексы от 0 до 14)
+    Dim i As Integer, j As Integer
+    Dim firstEvenIndex As Integer, secondEvenIndex As Integer
+    Dim evenNeighborsCount As Integer
+    Dim initialB As String, finalB As String
+    Dim temp As Integer
+
+   
+    Randomize
+    For i = 0 To 14
+        B(i) = Int(Rnd * 51) ' Случайные числа от 0 до 50
+        initialB = initialB & B(i) & ", "
+    Next i
+
+   
+    firstEvenIndex = -1
+    secondEvenIndex = -1
+
+    For i = 0 To 14
+        If B(i) Mod 2 = 0 Then
+            If firstEvenIndex = -1 Then
+                firstEvenIndex = i
+            ElseIf secondEvenIndex = -1 Then
+                secondEvenIndex = i
+                Exit For
+            End If
+        End If
+    Next i
+
+    
+    If firstEvenIndex <> -1 And secondEvenIndex <> -1 Then
+        temp = B(firstEvenIndex)
+        B(firstEvenIndex) = B(secondEvenIndex)
+        B(secondEvenIndex) = temp
+    End If
+
+   
+    evenNeighborsCount = 0
+    For i = 0 To 13 
+        If B(i) Mod 2 = 0 And B(i + 1) Mod 2 = 0 Then
+            evenNeighborsCount = evenNeighborsCount + 1
+        End If
+    Next i
+
+    
+    For i = 1 To 14 Step 2
+        B(i) = evenNeighborsCount
+    Next i
+
+   
+    For i = 0 To 14
+        finalB = finalB & B(i) & ", "
+    Next i
+
+   
+    MsgBox "Начальный массив B: " & vbCrLf & initialB & vbCrLf & _
+           "Количество соседств четных элементов: " & evenNeighborsCount & vbCrLf & _
+           "Конечный массив B: " & vbCrLf & finalB
+End Sub
