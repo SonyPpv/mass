@@ -322,55 +322,45 @@ End Sub
 8
 
 
-Sub InsertValueP()
-    Dim C(9) As Double ' Массив C из 10 элементов (индексы от 0 до 9)
-    Dim newArray() As Double ' Новый массив с добавлением числа P
-    Dim i As Integer
-    Dim newIndex As Integer
-    Dim P As Double
-    Dim initialC As String
-    Dim finalC As String
+Sub InsertPForSameSignPairs_NoRedim()
+    Dim C(9) As Double         ' Исходный массив C из 10 элементов
+    Dim newC(19) As Double     ' Новый массив фиксированного размера
+    Dim P As Double            ' Число, которое будет вставляться
+    Dim i As Integer, j As Integer
 
- 
     For i = 0 To 9
-        C(i) = Rnd() * 50 - 25 
-        initialC = initialC & C(i) & ", "
+        C(i) = Rnd() * 50 - 25
     Next i
 
-   
-    P = InputBox("Введите значение P, которое нужно вставить между числами с одинаковыми знаками:", "Ввод P", 0)
+    P = 100 ' Здесь используем 100 как пример числа P
 
-   
-    ReDim newArray(0)
-    newIndex = 0
+    j = 0 
+    For i = 0 To 8
+        newC(j) = C(i)  
+        j = j + 1
 
-    For i = 0 To 8 
-      
-        ReDim Preserve newArray(newIndex)
-        newArray(newIndex) = C(i)
-        newIndex = newIndex + 1
-
-     
+        ' Проверяем соседние числа
         If (C(i) >= 0 And C(i + 1) >= 0) Or (C(i) < 0 And C(i + 1) < 0) Then
-         
-            ReDim Preserve newArray(newIndex)
-            newArray(newIndex) = P
-            newIndex = newIndex + 1
+            newC(j) = P
+            j = j + 1
         End If
     Next i
 
-   
-    ReDim Preserve newArray(newIndex)
-    newArray(newIndex) = C(9)
+    newC(j) = C(9)
+    j = j + 1
 
-   
-    For i = 0 To UBound(newArray)
-        finalC = finalC & newArray(i) & ", "
+    Dim initialC As String
+    For i = 0 To 9
+        initialC = initialC & Format(C(i), "0.00") & ", "
     Next i
 
-   
-    MsgBox "Начальный массив C: " & vbCrLf & initialC & vbCrLf & _
-           "Новый массив C с вставленным числом P: " & vbCrLf & finalC
+    Dim finalC As String
+    For i = 0 To j - 1
+        finalC = finalC & Format(newC(i), "0.00") & ", "
+    Next i
+
+    MsgBox "Исходный массив C: " & vbCrLf & initialC & vbCrLf & _
+           "Новый массив с P: " & vbCrLf & finalC
 End Sub
 
 
